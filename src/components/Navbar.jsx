@@ -12,8 +12,8 @@ import {
 const links = [
   { name: "Home", path: "/" },
   { name: "Movies", path: "/movies" },
-  { name: "Theaters", path: "/theaters" },
-  { name: "Releases", path: "/releases" },
+  {name :"My Bookings", path:"/my-bookings"},
+  
 ];
 
 const Navbar = () => {
