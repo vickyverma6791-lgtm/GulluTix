@@ -1,12 +1,16 @@
-import { Star, Clock3 } from "lucide-react";
+import { Star, Clock3, Heart } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
+  const [liked,setLiked] = useState(false)
   return (
+    
     <Link
       to={`/movies/${movie.id}`}
       className="group relative block overflow-hidden rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl"
     >
+      
       {/* image */}
       <div className="relative h-[340px] overflow-hidden ">
         <img
@@ -17,12 +21,21 @@ const MovieCard = ({ movie }) => {
 
         {/* overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-
+        
         {/* rating */}
         <div className="absolute left-4 top-4 flex items-center gap-1 rounded-full bg-black/60 px-3 py-1.5 text-sm backdrop-blur-xl">
           <Star size={14} className="fill-yellow-400 text-yellow-400" />
           <span>{movie.rating}</span>
         </div>
+        <button
+          onClick={()=> setLiked(!liked)}
+          className="absolute right-4  top-4 z-20 rounded-full bg-black/50 p-2">
+        <Heart size ={18} 
+          className={ liked ? "fill-red-500 text-red-500"
+                            : "text-white" 
+          }
+        />
+        </button>
 
         {/* button */}
         <button className="absolute bottom-4 left-1/2 w-[85%] -translate-x-1/2 translate-y-16 rounded-full bg-red-600 py-3 font-medium text-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
