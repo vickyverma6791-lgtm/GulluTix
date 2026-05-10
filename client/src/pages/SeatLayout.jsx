@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 const SeatLayout = () => {
@@ -16,52 +17,75 @@ const SeatLayout = () => {
   const price = 200;
 
   const handleSeat = (seat) => {
-    // if seat is already selected, remove it
     if (selectedSeats.includes(seat)) {
       setSelectedSeats(
         selectedSeats.filter((s) => s !== seat)
       );
     } else {
-      // otherwise add seat in selected seats
-      setSelectedSeats([...selectedSeats, seat]);
+      setSelectedSeats([
+        ...selectedSeats,
+        seat,
+      ]);
     }
   };
 
   const handlePay = () => {
-    const booking = {
-      movieId :id,
-      date,
-      seats:selectedSeats,
-      total : selectedSeats.length * price
+    if (!selectedSeats.length) {
+      toast.error("Please select a seat")
+      return
     }
-    const oldBooking = JSON.parse(localStorage.getItem("booking")) || []
-    
-    localStorage.setItem("bookings",JSON.stringify([...oldBooking,booking]))
-    // move selected seats into booked seats
-    setBookedSeats([...bookedSeats, ...selectedSeats]);
 
-    // show success message
-    setMessage(
-      `Booking Successful: ${selectedSeats.join(", ")}`
+    const booking = {
+      movieId: id,
+      date,
+      seats: selectedSeats,
+      total: selectedSeats.length * price,
+    };
+
+    const oldBookings =
+      JSON.parse(
+        localStorage.getItem("bookings")
+      ) || [];
+
+    localStorage.setItem(
+      "bookings",
+      JSON.stringify([
+        ...oldBookings,
+        booking,
+      ])
     );
 
-    // clear selected seats
+    setBookedSeats([
+      ...bookedSeats,
+      ...selectedSeats,
+    ]);
+
+    setMessage(
+      `Booking Successful: ${selectedSeats.join(
+        ", "
+      )}`
+    );
+    toast.success("Ticket booked Successfully")
+
     setSelectedSeats([]);
   };
 
   return (
-    <section className="min-h-screen bg-black pt-28 text-white">
+    <section className="min-h-screen bg-dark pt-28 text-light">
       <div className="mx-auto max-w-7xl px-6">
-        <h1 className="text-4xl font-bold">Seat Selection</h1>
+        <h1 className="text-5xl font-bold">
+          Choose Your Seat
+        </h1>
 
-        <p className="mt-2 text-gray-400">
-          Movie ID: {id} | Date: {date}
+        <p className="mt-2 text-muted">
+          Movie ID: {id} • {date}
         </p>
 
         {/* screen */}
-        <div className="mb-10 mt-10 text-center">
-          <div className="mx-auto h-3 w-72 rounded-full bg-white/40 shadow-[0_0_40px_rgba(255,255,255,.35)]" />
-          <p className="mt-3 text-sm tracking-[6px] text-gray-400">
+        <div className="mb-14 mt-12 text-center">
+          <div className="mx-auto h-4 w-[420px] rounded-full bg-primary/70 shadow-[0_0_60px_rgba(16,185,129,.45)]" />
+
+          <p className="mt-4 text-sm tracking-[8px] text-muted">
             SCREEN
           </p>
         </div>
@@ -71,14 +95,20 @@ const SeatLayout = () => {
           {seats.map((seat) => (
             <button
               key={seat}
-              onClick={() => handleSeat(seat)}
-              disabled={bookedSeats.includes(seat)}
-              className={`rounded-xl p-4 transition ${
+              onClick={() =>
+                handleSeat(seat)
+              }
+              disabled={bookedSeats.includes(
+                seat
+              )}
+              className={`rounded-2xl p-4 font-medium transition-all duration-300 ${
                 bookedSeats.includes(seat)
-                  ? "cursor-not-allowed bg-gray-500"
-                  : selectedSeats.includes(seat)
-                  ? "bg-red-600"
-                  : "bg-gray-700 hover:bg-gray-600"
+                  ? "cursor-not-allowed bg-gray-600 text-gray-300"
+                  : selectedSeats.includes(
+                      seat
+                    )
+                  ? "bg-primary text-white shadow-lg shadow-primary/30"
+                  : "border border-white/10 bg-card/70 hover:border-primary/30 hover:bg-card"
               }`}
             >
               {seat}
@@ -86,33 +116,41 @@ const SeatLayout = () => {
           ))}
         </div>
 
-        {/* selected seats */}
-        <p className="mt-6 text-gray-300">
-          Selected Seats: {selectedSeats.join(", ") || "None"}
-        </p>
+        {/* summary */}
+        <div className="mt-10 rounded-3xl border border-white/10 bg-card/60 p-6 backdrop-blur-xl">
+          <p className="text-muted">
+            Selected Seats
+          </p>
 
-        {/* total */}
-        <h2 className="mt-4 text-2xl font-semibold">
-          Total: ₹{selectedSeats.length * price}
-        </h2>
+          <h3 className="mt-2 text-xl font-semibold">
+            {selectedSeats.join(", ") ||
+              "None"}
+          </h3>
 
-        {/* pay button */}
-        <button
-          onClick={handlePay}
-          className="mt-4 rounded bg-red-600 px-6 py-3 hover:bg-red-700"
-        >
-          Pay Now
-        </button>
+          <h2 className="mt-5 text-3xl font-bold">
+            ₹
+            {selectedSeats.length *
+              price}
+          </h2>
 
-        {/* message */}
-        {message && (
-          <p className="mt-4 text-green-400">{message}</p>
-        )}
+          <button
+            onClick={handlePay}
+            className="mt-6 w-full rounded-2xl bg-primary px-6 py-4 font-medium text-white shadow-lg shadow-primary/30 transition hover:bg-secondary"
+          >
+            Pay Now
+          </button>
+
+          {message && (
+            <p className="mt-4 text-primary">
+              {message}
+            </p>
+          )}
+        </div>
 
         {/* legend */}
-        <div className="mt-6 flex gap-6">
+        <div className="mt-6 flex flex-wrap gap-6 text-sm text-muted">
           <p>⬜ Available</p>
-          <p>🟥 Selected</p>
+          <p>🟩 Selected</p>
           <p>⬛ Booked</p>
         </div>
       </div>

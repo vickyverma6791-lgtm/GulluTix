@@ -7,10 +7,13 @@
   scrollbar-color: #787777 #1e1e1e;
 
 }
-
-@theme{
-   --color-primary : #F84565;
-   --color-primary-dull : #D63854;
+@theme {
+  --color-primary: #10b981;
+  --color-secondary: #34D399;
+  --color-dark: #08120D;
+  --color-card: #102019;
+  --color-muted: #9CA3AF;
+  --color-light: #F8FAFC;
 }
 
 body{
