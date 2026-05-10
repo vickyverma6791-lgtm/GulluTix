@@ -20,7 +20,7 @@ const HeroSection = ({ movies = [] }) => {
   if (!movies.length) return null;
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white">
+    <section className="relative min-h-screen overflow-hidden bg-dark text-white">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -35,7 +35,7 @@ const HeroSection = ({ movies = [] }) => {
         className="h-screen"
       >
         {movies.map((movie) => (
-          <SwiperSlide key={movie.id}>
+          <SwiperSlide key={movie._id}>
             <div className="relative h-screen w-full">
               {/* background */}
               <img
@@ -45,14 +45,14 @@ const HeroSection = ({ movies = [] }) => {
               />
 
               {/* overlays */}
-              <div className="absolute inset-0 bg-black/55 backdrop-blur-[2px]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-dark/60 backdrop-blur-[2px]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/50 to-transparent" />
 
               {/* content */}
               <div className="relative z-20 mx-auto flex h-full max-w-7xl items-center justify-between px-6 pt-24 md:px-10 lg:px-16">
                 {/* LEFT */}
                 <div className="max-w-2xl">
-                  <p className="mb-4 text-sm font-semibold uppercase tracking-[3px] text-red-400">
+                  <p className="mb-4 text-sm font-semibold uppercase tracking-[3px] text-primary/100">
                     Now Showing
                   </p>
 
@@ -70,7 +70,7 @@ const HeroSection = ({ movies = [] }) => {
 
                   {/* meta pills */}
                   <div className="mt-6 flex flex-wrap gap-3">
-                    <span className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm backdrop-blur-md">
+                    <span className="flex items-center gap-2 rounded-full border border-white/10 bg-card/60 px-4 py-2 text-sm backdrop-blur-md">
                       <Star
                         size={16}
                         className="fill-yellow-400 text-yellow-400"
@@ -89,17 +89,17 @@ const HeroSection = ({ movies = [] }) => {
                   </div>
 
                   {/* desc */}
-                  <p className="mt-6 max-w-xl leading-8 text-gray-200">
+                  <p className="mt-6 max-w-xl leading-8 text-muted">
                     {movie.overview}
                   </p>
 
                   {/* CTA */}
                   <div className="mt-8 flex flex-wrap gap-4">
-                    <button className="rounded-full bg-red-600 px-8 py-3 font-medium text-white transition hover:scale-105 hover:bg-red-700">
-                      Book Now
+                   <button className="rounded-full bg-primary px-8 py-3 font-medium text-white shadow-lg shadow-primary/30 transition hover:scale-105 hover:bg-secondary">
+                   Book Now
                     </button>
 
-                    <button className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3 backdrop-blur-md transition hover:scale-105 hover:bg-white/20">
+                    <button className="flex items-center gap-2 rounded-full border border-white/10 bg-card/60 px-8 py-3 backdrop-blur-md transition hover:scale-105 hover:bg-card">
                       <Play size={18} fill="white" />
                       Trailer
                     </button>
@@ -111,7 +111,7 @@ const HeroSection = ({ movies = [] }) => {
                   <img
                     src={movie.poster}
                     alt={movie.title}
-                    className="w-[400px] rounded-[28px] border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,.55)] transition duration-500 hover:scale-105"
+                    className="w-[400px] rounded-[28px] border border-white/10 shadow-[0_20px_80px_rgba(16,185,129,.18)] transition duration-500 hover:scale-105"
                   />
                 </div>
               </div>
@@ -123,7 +123,7 @@ const HeroSection = ({ movies = [] }) => {
       {/* arrows */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
-        className="absolute left-5 top-1/2 z-30 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 backdrop-blur-xl transition hover:scale-110 hover:bg-white/20 md:flex"
+        className="absolute left-5 top-1/2 z-30 hidden -translate-y-1/2 rounded-full bg-card/70 p-3 backdrop-blur-xl transition hover:scale-110 hover:bg-primary md:flex"
       >
         <ChevronLeft />
       </button>
@@ -143,7 +143,7 @@ const HeroSection = ({ movies = [] }) => {
             onClick={() => swiperRef.current?.slideToLoop(index)}
             className={`rounded-full transition-all duration-300 ${
               active === index
-                ? "h-2 w-12 bg-red-500"
+                ? "h-2 w-12 bg-primary"
                 : "h-2 w-6 bg-white/40"
             }`}
           />

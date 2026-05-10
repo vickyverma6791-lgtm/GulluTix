@@ -23,16 +23,15 @@ const Navbar = () => {
     <>
       {/* NAVBAR */}
       <header className="fixed top-1 left-1/2 z-50 w-[95%]  -translate-x-1/2">
-        <nav className="flex items-center justify-between px-4 py-3 ">
-          
+        <nav className="flex items-center justify-between rounded-3xl border border-white/10 bg-card/40 px-4 py-3 backdrop-blur-2xl">
           {/* logo */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-red-700 shadow-lg shadow-red-600/30">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-primary bg-gradient-to-br from-primary to-secondary shadow-lg shadow-primary/30">
               <Film size={20} className="text-white" />
             </div>
 
             <h1 className="text-xl font-bold text-white md:text-2xl">
-              Gullu<span className="text-red-500">Tix</span>
+              Gullu<span className="text-primary">Tix</span>
             </h1>
           </Link>
 
@@ -45,7 +44,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `rounded-full px-7 py-2.5 text-sm font-medium transition-all duration-300 ${
                     isActive
-                      ? "bg-red-600 text-white shadow-lg shadow-red-600/30"
+                      ? "bg-primary text-white shadow-lg shadow-primary/30"
                       : "text-gray-300 hover:bg-white/10 hover:text-white"
                   }`
                 }
@@ -57,11 +56,11 @@ const Navbar = () => {
 
           {/* desktop right */}
           <div className="hidden lg:flex items-center gap-3">
-            <button className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-xl transition hover:bg-white/20">
+            <button className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-xl transition hover:bg-secondary">
               <Search size={18} />
             </button>
 
-            <button className="flex items-center gap-2 rounded-full bg-red-600 px-6 py-3 font-medium text-white shadow-lg shadow-red-600/30 transition hover:scale-105 hover:bg-red-700">
+            <button className="flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-white shadow-lg shadow-primary/30 transition hover:scale-105 hover:bg-primary/30">
               <User size={18} />
               Login
             </button>
@@ -89,19 +88,19 @@ const Navbar = () => {
 
       {/* drawer */}
       <aside
-        className={`fixed top-0 right-0 z-[70] h-full w-[85%] max-w-sm border-l border-white/10 bg-black/80 backdrop-blur-3xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-[70] h-full w-[85%] max-w-sm border-l border-white/10 bg-dark/90 backdrop-blur-3xl transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+        <div className="flex items-center justify-between rounded-3xl border border-white/10 bg-card/40 px-4 py-3 backdrop-blur-2xl">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-red-700">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary">
               <Film size={18} className="text-white" />
             </div>
 
             <h2 className="text-xl font-bold text-white">
-              Gullu<span className="text-red-500">Tix</span>
+              Gullu<span className="text-primary">Tix</span>
             </h2>
           </div>
 
@@ -131,7 +130,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `mb-2 flex items-center justify-between rounded-2xl px-4 py-4 transition ${
                   isActive
-                    ? "bg-red-600 text-white"
+                    ? "bg-primary text-white"
                     : "text-white hover:bg-white/10"
                 }`
               }
@@ -144,7 +143,7 @@ const Navbar = () => {
 
         {/* login */}
         <div className="absolute bottom-8 left-0 w-full px-6">
-          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-red-600 py-4 font-medium text-white shadow-lg shadow-red-600/30">
+          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 font-medium text-white shadow-lg shadow-primary/30">
             <User size={18} />
             Login
           </button>
