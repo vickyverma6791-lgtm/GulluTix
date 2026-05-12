@@ -8,6 +8,7 @@ const SeatLayout = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [message, setMessage] = useState("");
+  const [paying,setPaying] = useState(false)
 
   const seats = [];
   for (let i = 1; i <= 40; i++) {
@@ -68,6 +69,7 @@ const SeatLayout = () => {
     toast.success("Ticket booked Successfully")
 
     setSelectedSeats([]);
+    setPaying(true)
   };
 
   return (
@@ -134,12 +136,12 @@ const SeatLayout = () => {
           </h2>
 
           <button
+            disabled={paying}
             onClick={handlePay}
-            className="mt-6 w-full rounded-2xl bg-primary px-6 py-4 font-medium text-white shadow-lg shadow-primary/30 transition hover:bg-secondary"
+            className="mt-6 w-full rounded-2xl bg-primary px-6 py-4 font-medium text-white shadow-lg shadow-primary/30 transition hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Pay Now
+            {paying ? "Processing..." : "Pay Now"}
           </button>
-
           {message && (
             <p className="mt-4 text-primary">
               {message}

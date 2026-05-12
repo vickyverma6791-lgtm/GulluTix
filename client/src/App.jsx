@@ -9,6 +9,9 @@ import MyBooking from './pages/MyBooking'
 
 import Footer from './components/Footer'
 import {Toaster} from 'react-hot-toast'
+import Admin from './pages/Admin'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 const App = () => {
 
@@ -17,7 +20,7 @@ const App = () => {
 
   return (
     <div>
-      <Toaster />
+    
       {!isAdminRoute && <Navbar/>}
       {/* Navbar will show in all pages except /admin    */}
       <Routes>
@@ -26,7 +29,9 @@ const App = () => {
           <Route path='/movies/:id' element={<MovieDetails/>}></Route>
           <Route path='/movies/:id/:date' element={<SeatLayout/>}></Route>
           <Route path='/my-bookings' element={<MyBooking/>}></Route>
-         
+          <Route path ='/admin' element ={<Admin />} />
+          <Route path='/login' element ={<Login/>} ></Route>
+          <Route path='/register' element ={<Register/>}></Route>
       </Routes>
       {!isAdminRoute && <Footer/>}
       
